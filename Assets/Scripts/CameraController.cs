@@ -15,22 +15,34 @@ public class CameraController : MonoBehaviour
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * range, Color.red);
         if(Physics.SphereCast(transform.position, radius, transform.TransformDirection(Vector3.forward),out hit, range,layerMask))
         {
-            if (hit.transform.GetComponent<Chest>().monsterType == MonsterType.Chest)
+            if (hit.transform.GetComponent<Chest>() != null)
             {
                 gKey.gameObject.SetActive(true);
+                if (Input.GetKeyDown(KeyCode.G))
+                {
+                    hit.transform.GetComponent<Chest>().ChangeState(ChestState.Interaction);
+                }
+            }
+
+            if(hit.transform.GetComponent<ChestController>() != null)
+            {
+                gKey.gameObject.SetActive(true);
+                if (Input.GetKeyDown(KeyCode.G))
+                {
+                    if(hit.transform.GetComponent<ChestController>().state == ChestOnOffState.Close)
+                    {
+                        hit.transform.GetComponent<ChestController>().ChangeState(ChestOnOffState.Open);
+                    }
+                    else
+                    {
+                        hit.transform.GetComponent<ChestController>().ChangeState(ChestOnOffState.Close);
+                    }
+                }
             }
         }
         else
         {
             gKey.gameObject.SetActive(false);
-        }
-
-        if(gKey.activeSelf)
-        {
-            if(Input.GetKeyDown(KeyCode.G))
-            {
-                hit.transform.GetComponent<Chest>().ChangeState(ChestState.Interaction);
-            }
         }
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum MonsterType
 {
-    Chest
+    Chest, Skeleton
 }
 
 public abstract class BaseState<T>
@@ -25,6 +25,22 @@ public class Monster : MonoBehaviour,IInteractable
         set { hp = value; }
     }
 
+    public GameObject damageText;
+    public Transform Canvas;
+    public Stack<GameObject> textList = new Stack<GameObject>();
+
+    public void Start()
+    {
+        for(int i = 0; i < 5; i++)
+        {
+            GameObject gameObject = Instantiate(damageText);
+            textList.Push(gameObject);
+            gameObject.SetActive(false);
+            gameObject.transform.parent = Canvas;
+            gameObject.transform.position = Canvas.position;
+            gameObject.transform.localScale = new Vector3(1, 1, 1);
+        }
+    }
 
     public void Die()
     {
@@ -36,9 +52,17 @@ public class Monster : MonoBehaviour,IInteractable
 
     }
 
-    public void TakeHit(float damage)
+    public virtual void TakeHit(float damage)
     {
         Hp -= damage;
         Debug.Log(Hp);
+    }
+
+    public IEnumerator DestroyCo(GameObject text)
+    {
+        yield return new WaitForSeconds(3f);
+        text.SetActive(false);
+        text.transform.position = Canvas.position;
+        textList.Push(text);
     }
 }

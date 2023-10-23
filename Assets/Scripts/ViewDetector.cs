@@ -13,10 +13,12 @@ public class ViewDetector : MonoBehaviour
 
     [SerializeField] private float radiu;
     [SerializeField] private float angle;
+    [SerializeField] private float subAngle;
     [SerializeField] private float atkRadiu;
     [SerializeField] private float subRadiu;
 
     [SerializeField] private LayerMask layerMask;
+    [SerializeField] private LayerMask obstacleMask;
 
 
     public void FindTarget()
@@ -31,7 +33,7 @@ public class ViewDetector : MonoBehaviour
                 continue;
             }
             float findTargetRange = Vector3.Distance(transform.position, targets[i].transform.position);
-            if(Physics.Raycast(transform.position, findTarget,findTargetRange,layerMask))
+            if(Physics.Raycast(transform.position, findTarget,findTargetRange, obstacleMask))
             {
                 continue;
             }
@@ -56,7 +58,7 @@ public class ViewDetector : MonoBehaviour
                 continue;
             }
             float findTargetRange = Vector3.Distance(transform.position, atkTargets[i].transform.position);
-            if (Physics.Raycast(transform.position, findTarget, findTargetRange, layerMask))
+            if (Physics.Raycast(transform.position, findTarget, findTargetRange, obstacleMask))
             {
                 continue;
             }
@@ -75,6 +77,16 @@ public class ViewDetector : MonoBehaviour
 
         for (int i = 0; i < subTargets.Length; i++)
         {
+            Vector3 findTarget = (subTargets[i].transform.position - transform.position).normalized;
+            if (Vector3.Dot(transform.forward, findTarget) < Mathf.Cos(subAngle * 0.5f * Mathf.Deg2Rad))
+            {
+                continue;
+            }
+            float findTargetRange = Vector3.Distance(transform.position, subTargets[i].transform.position);
+            if (Physics.Raycast(transform.position, findTarget, findTargetRange, obstacleMask))
+            {
+                continue;
+            }
             subTarget = subTargets[i].gameObject;
             return;
         }

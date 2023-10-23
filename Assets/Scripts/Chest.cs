@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public enum ChestState
 {
@@ -11,11 +12,12 @@ public enum ChestState
 
 
 
-public class IdleState : BaseState<Chest>
+public class ChestIdleState : BaseState<Chest>
 {
     public override void Enter(Chest monster)
     {
-        monster.animator.SetTrigger("Idle");
+        monster.Canvas.gameObject.SetActive(false);
+        
     }
 
     public override void Exit(Chest monster)
@@ -25,13 +27,15 @@ public class IdleState : BaseState<Chest>
 
     public override void Update(Chest monster)
     {
+        monster.animator.SetTrigger("Idle");
     }
 }
 
-public class Interaction : BaseState<Chest>
+public class ChestInteraction : BaseState<Chest>
 {
     public override void Enter(Chest monster)
     {
+        monster.Canvas.gameObject.SetActive(true);
         monster.animator.SetTrigger("IdleNomal");
         monster.StartCoroutine(InteractionCo(monster));
     }
@@ -63,7 +67,7 @@ public class Interaction : BaseState<Chest>
 }
 
 
-public class WalkState : BaseState<Chest>
+public class ChestWalkState : BaseState<Chest>
 {
     public override void Enter(Chest monster)
     {
@@ -95,7 +99,7 @@ public class WalkState : BaseState<Chest>
     }
 }
 
-public class AtkState : BaseState<Chest>
+public class ChestAtkState : BaseState<Chest>
 {
 
     public override void Enter(Chest monster)
@@ -147,6 +151,8 @@ public class AtkState : BaseState<Chest>
 
 public class Chest : Monster
 {
+    [SerializeField] private Slider slider;
+    private float maxHp;
     public Transform atkPoint;
     public Vector3 attackRang;
 
@@ -160,19 +166,24 @@ public class Chest : Monster
     public Animator animator;
     public NavMeshAgent nav;
 
+    [SerializeField] private Camera cam;
+
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
         monsterType = MonsterType.Chest;
         stateMachine.Reset(this);
-        stateMachine.AddState(ChestState.Idle, new IdleState());
-        stateMachine.AddState(ChestState.Interaction, new Interaction());
-        stateMachine.AddState(ChestState.Walk, new WalkState());
-        stateMachine.AddState(ChestState.Atk, new AtkState());
+        stateMachine.AddState(ChestState.Idle, new ChestIdleState());
+        stateMachine.AddState(ChestState.Interaction, new ChestInteraction());
+        stateMachine.AddState(ChestState.Walk, new ChestWalkState());
+        stateMachine.AddState(ChestState.Atk, new ChestAtkState());
         ChangeState(ChestState.Idle);
         Hp = 100;
+        maxHp = Hp;
         damage = 10f;
+        cam = GameObject.Find("Main Camera").GetComponent<Camera>();
     }
 
     private void Update()
@@ -181,12 +192,28 @@ public class Chest : Monster
         detector.FindAtkTarget();
         detector.FindSubTarget();
         stateMachine.Update();
+
+        Quaternion q_hp = Quaternion.LookRotation(Canvas.position - cam.transform.position);
+        Vector3 hp_angle = Quaternion.RotateTowards(Canvas.rotation, q_hp, 200).eulerAngles;
+        Canvas.rotation = Quaternion.Euler(0, hp_angle.y, 0);
+        slider.value = Hp / maxHp;
     }
 
     public void ChangeState(ChestState nextState)
     {
         chestState = nextState;
         stateMachine.ChangeState(nextState);
+    }
+
+    public override void TakeHit(float damage)
+    {
+        if(chestState != ChestState.Idle)
+        {
+            base.TakeHit(damage);
+            GameObject getText = textList.Pop();
+            getText.SetActive(true);
+            StartCoroutine(DestroyCo(getText));
+        }
     }
 
     private void OnDrawGizmosSelected()
