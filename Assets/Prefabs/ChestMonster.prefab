@@ -861,7 +861,7 @@ GameObject:
   - component: {fileID: 1624813048}
   m_Layer: 8
   m_Name: ChestMonster
-  m_TagString: Untagged
+  m_TagString: ChestMonster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -936,7 +936,7 @@ MonoBehaviour:
   subTarget: {fileID: 0}
   radiu: 5
   angle: 250
-  subAngle: 0
+  subAngle: 360
   atkRadiu: 1.4
   subRadiu: 5
   layerMask:
@@ -944,7 +944,7 @@ MonoBehaviour:
     m_Bits: 512
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
 --- !u!114 &8049967254342113556
 MonoBehaviour:
   m_ObjectHideFlags: 0

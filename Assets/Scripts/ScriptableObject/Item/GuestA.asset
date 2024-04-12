@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e1c1831b58776644b78e12a1d3496e9, type: 3}
+  m_Name: GuestA
+  m_EditorClassIdentifier: 
+  talks:
+  - talkerName: "\uC9C1\uC5C5 : \uC804\uC0AC"
+    conversation: "\uBAAC\uC2A4\uD130\uC5D0\uAC8C \uD314\uC744 \uBB3C\uB824\uC11C
+      \uD3EC\uC158\uC774 \uD544\uC694\uD569\uB2C8\uB2E4. \uBE68\uB9AC \uC544\uBB34\uAC70\uB098
+      \uC8FC\uC138\uC694 \uAE09\uD569\uB2C8\uB2E4!!"
+    price: "\uBCF4\uC0C1 : 1 ~ 10"
+    image: {fileID: 21300000, guid: b729e2d8000c971478281b16da671294, type: 3}
+    item: {fileID: 11400000, guid: c2c922e87e4735348a9ee8e6139e714c, type: 2}
+  - talkerName: "\uC9C1\uC5C5 : \uC804\uC0AC"
+    conversation: "\uB9C8\uBC95\uC0AC \uC5EC\uC790\uCE5C\uAD6C\uC5D0\uAC8C \uC120\uBB3C\uD560
+      \uD3EC\uC158\uC744 \uC8FC\uC2DC\uC624 \uAC12\uC740 \uB450\uB451\uD788 \uCC59\uACA8\uC8FC\uACA0\uC18C"
+    price: "\uBCF4\uC0C1 : 10 ~ 20"
+    image: {fileID: 21300000, guid: b729e2d8000c971478281b16da671294, type: 3}
+    item: {fileID: 11400000, guid: cc700b62aed202e4c82e1d4a09cc4541, type: 2}

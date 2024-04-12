@@ -3,7 +3,21 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Item
+  - Chest
+  - ChestMonster
+  - Door
+  - Cauldron
+  - Outline
+  - Enhancement
+  - AmountSetting
+  - Teleport
+  - Inventory
+  - Road
+  - Guest
+  - Bell
+  - Exit
   layers:
   - Default
   - TransparentFX
@@ -12,17 +26,17 @@ TagManager:
   - Water
   - UI
   - Ground
-  - 
+  - Outline
   - Monster
   - Player
   - Chest
   - Wall
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Item
+  - Door
+  - Crafting Table
+  - Teleport
+  - Guest
+  - Bell
   - 
   - 
   - 
