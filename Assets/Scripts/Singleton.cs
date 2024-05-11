@@ -30,6 +30,6 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
 
     private void Awake()
     {
-        _instance = (T)this;
+        //_instance = (T)this;
     }
 }

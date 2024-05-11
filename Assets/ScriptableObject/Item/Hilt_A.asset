@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc492f583401d844c8569834da6c743f, type: 3}
+  m_Name: Hilt_A
+  m_EditorClassIdentifier: 
+  itemImage: {fileID: 21300000, guid: d51ccb1d3279e024d8023a5a70364ee9, type: 3}
+  itemPrefab: {fileID: 8816370233014034737, guid: 21958098601684e458c8a8de1648d7d8, type: 3}
+  itemType: 2
+  useType: 0
+  ingredientType: 0
+  bladeType: 0
+  hiltType: 1
+  upGrade: []
+  percentage: 20
+  state:
+    amount: 0
+    max: 0
+    min: 0
+    name: 
+    content: 

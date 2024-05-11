@@ -6,8 +6,27 @@ using UnityEngine;
 
 public enum DoorOnOffState
 {
-    Open, Close
+    Open, Close, Idle
 }
+
+public class DoorIdle : BaseState<Door>
+{
+    public override void Enter(Door door)
+    {
+        door.animator.Play("DoorIdle");
+    }
+
+    public override void Exit(Door door)
+    {
+
+    }
+
+    public override void Update(Door door)
+    {
+
+    }
+}
+
 
 public class DoorOpen : BaseState<Door>
 {
@@ -57,15 +76,30 @@ public class Door : MonoBehaviour
     public Renderer parentmeshRenderer;
     public float col = 130f;
     private StateMachine<DoorOnOffState, Door> stateMachine = new StateMachine<DoorOnOffState, Door>();
+    bool isOpen = false;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
         meshRenderer = GetComponent<Renderer>();
         stateMachine.Reset(this);
+        stateMachine.AddState(DoorOnOffState.Idle, new DoorIdle());
         stateMachine.AddState(DoorOnOffState.Open, new DoorOpen());
         stateMachine.AddState(DoorOnOffState.Close, new DoorClose());
-        ChangeState(DoorOnOffState.Close);
+        ChangeState(DoorOnOffState.Idle);
+    }
+
+    public void OnOff()
+    {
+        isOpen = !isOpen;
+        if(isOpen)
+        {
+            ChangeState(DoorOnOffState.Open);
+        }
+        else
+        {
+            ChangeState(DoorOnOffState.Close);
+        }
     }
 
     public void SetColor(float alpha)

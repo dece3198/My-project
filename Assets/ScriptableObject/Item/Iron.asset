@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc492f583401d844c8569834da6c743f, type: 3}
+  m_Name: Iron
+  m_EditorClassIdentifier: 
+  itemImage: {fileID: -828489832, guid: 45fcb5cba457c714183bbeb2466f0f2e, type: 3}
+  itemPrefab: {fileID: 8610888642201576207, guid: 63e192646fe17d34f8fcb50001695bf4, type: 3}
+  itemType: 2
+  useType: 0
+  ingredientType: 6
+  upGrade:
+  - {fileID: 11400000, guid: 6f81d4095c5be3a4eaa14ab96bce6ee5, type: 2}
+  percentage: 0
+  state:
+    amount: 0
+    max: 0
+    min: 0
+    name: 
+    content: 

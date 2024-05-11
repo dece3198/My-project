@@ -18,6 +18,7 @@ TagManager:
   - Guest
   - Bell
   - Exit
+  - Anvil
   layers:
   - Default
   - TransparentFX
@@ -37,7 +38,7 @@ TagManager:
   - Teleport
   - Guest
   - Bell
-  - 
+  - Anvil
   - 
   - 
   - 

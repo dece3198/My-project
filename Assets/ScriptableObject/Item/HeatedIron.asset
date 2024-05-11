@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc492f583401d844c8569834da6c743f, type: 3}
+  m_Name: HeatedIron
+  m_EditorClassIdentifier: 
+  itemImage: {fileID: -416116457, guid: d2a223261c7f75c4eb06e8452a746024, type: 3}
+  itemPrefab: {fileID: 7223567543892374692, guid: 3f060e2c5af214646b57291c327927ea, type: 3}
+  itemType: 2
+  useType: 0
+  ingredientType: 0
+  upGrade:
+  - {fileID: 11400000, guid: ce12ad77d40d1274e8184345c8a807d9, type: 2}
+  - {fileID: 11400000, guid: 339c1fc503240f14185155abe88ede1c, type: 2}
+  percentage: 0
+  state:
+    amount: 0
+    max: 0
+    min: 0
+    name: 
+    content: 

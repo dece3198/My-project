@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc492f583401d844c8569834da6c743f, type: 3}
+  m_Name: Glass Bottle
+  m_EditorClassIdentifier: 
+  itemImage: {fileID: 21300000, guid: a6fbd5a181bc51e42a61a73fe8d727c8, type: 3}
+  itemPrefab: {fileID: 218491870535558885, guid: 832599763b3c9a94e8b3dcade8070d31, type: 3}
+  itemType: 2
+  useType: 0
+  ingredientType: 1
+  upGrade: []
+  percentage: 0
+  state:
+    amount: 0
+    max: 0
+    min: 0
+    name: "\uC720\uB9AC\uBCD1"
+    content: "\uD3EC\uC158\uC744 \uB9CC\uB4E4 \uB54C\uC758 \uD575\uC2EC \uC7AC\uB8CC"
