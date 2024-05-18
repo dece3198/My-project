@@ -53,6 +53,7 @@ public class AmountSetting : MonoBehaviour
                 {
                     slot.item.state.amount = Random.Range(slot.item.state.min, slot.item.state.max);
                     Inventory.instance.AcquireAItem(slot.item, slot.item.state.amount);
+                    slot.item.state.amount = 0;
                     slot.MinusCount(1);
                 }
                 else

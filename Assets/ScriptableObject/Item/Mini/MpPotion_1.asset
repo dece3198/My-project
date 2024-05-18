@@ -17,10 +17,13 @@ MonoBehaviour:
   itemType: 1
   useType: 7
   ingredientType: 0
+  bladeType: 0
+  hiltType: 0
+  classType: 0
   upGrade: []
   percentage: 0
   state:
-    amount: 15
+    amount: 0
     max: 20
     min: 10
     name: MpPotin

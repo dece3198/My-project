@@ -20,12 +20,12 @@ public class BuyManager : MonoBehaviour
                 }
                 else
                 {
-                    GoldManager.instance.gold += slot.amount;
+                    InventoryButton.instance.goldManager.gold += slot.amount;
                     guest.ChangeState(GuestState.Out);
                     if(slot.itemCount > 1)
                     {
-                        Inventory.instance.AcquireItem(slot.item, slot.itemCount);
                         slot.MinusCount(1);
+                        Inventory.instance.AcquireAItem(slot.item,slot.amount,slot.itemCount);
                     }
                     else
                     {

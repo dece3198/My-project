@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class GuestGenerator : Singleton<GuestGenerator>
+public class GuestGenerator : MonoBehaviour
 {
-    [SerializeField] private GameObject guestParent;
+    public static GuestGenerator instance;
     [SerializeField] private List<GameObject> guests = new List<GameObject>();
     [SerializeField] private List<GameObject> guestPool = new List<GameObject>();
     int rand = 0;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {

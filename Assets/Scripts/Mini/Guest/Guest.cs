@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public enum GuestState
 {
-    Idle,Walk,Buy,Out
+    Idle,Walk,Buy,Out,Worry, Angry
 }
 
 
@@ -83,7 +83,6 @@ public class OutState : BaseState<Guest>
     {
         guest.animator.SetBool("Walk", true);
         guest.buyUi.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public override void Exit(Guest guest)

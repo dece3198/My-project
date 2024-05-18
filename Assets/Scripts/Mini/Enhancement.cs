@@ -58,18 +58,26 @@ public class Enhancement : MonoBehaviour
                 Item item = slot.item.upGrade[0];
                 if (slot.item.upGrade != null)
                 {
-                    if (number <= slot.item.percentage)
+                    if(slot.item.percentage > 0)
                     {
-                        effectAnimator.SetBool("Up", true);
-                        effectAnimator.Play("effect Animation");
-                        slot.MinusCount(1);
-                        Inventory.instance.AcquireItem(item);
+                        if (number <= slot.item.percentage)
+                        {
+                            effectAnimator.SetBool("Up", true);
+                            effectAnimator.Play("effect Animation");
+                            slot.MinusCount(1);
+                            Inventory.instance.AcquireItem(item);
+                        }
+                        else
+                        {
+                            effectAnimator.SetBool("Up", false);
+                            effectAnimator.Play("effect Animation");
+                            slot.MinusCount(1);
+                        }
                     }
                     else
                     {
-                        effectAnimator.SetBool("Up", false);
-                        effectAnimator.Play("effect Animation");
-                        slot.MinusCount(1);
+                        Inventory.instance.AcquireItem(slot.item, slot.itemCount);
+                        slot.ClearSlot();
                     }
                 }
                 else

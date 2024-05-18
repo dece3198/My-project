@@ -20,7 +20,7 @@ MonoBehaviour:
   bladeType: 0
   hiltType: 0
   upGrade: []
-  percentage: 0
+  percentage: 120
   state:
     amount: 0
     max: 0

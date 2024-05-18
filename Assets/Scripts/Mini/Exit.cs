@@ -20,5 +20,10 @@ public class Exit : MonoBehaviour
                 case "Exit": GuestGenerator.instance.GuestEnterPool(other.gameObject);break;
             }
         }
+
+        if(other.GetComponent<GuestController>() != null)
+        {
+            Generator.instance.GuestEnterPool(other.GetComponent<GuestController>().gameObject);
+        }
     }
 }

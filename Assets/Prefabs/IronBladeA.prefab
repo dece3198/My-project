@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 483821806597309224}
   - component: {fileID: 473712893998540848}
   - component: {fileID: 443587009835699190}
-  m_Layer: 0
+  - component: {fileID: -2519700029052514773}
+  m_Layer: 12
   m_Name: IronBladeA
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,3 +99,16 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43731705351425102, guid: 300a17ef5cb8fc6419f6874b4b16b87d, type: 2}
+--- !u!114 &-2519700029052514773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486595984707090154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b72ab7aba4831f941b62878afb3e23be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: ce12ad77d40d1274e8184345c8a807d9, type: 2}

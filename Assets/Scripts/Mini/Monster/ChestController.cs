@@ -5,7 +5,24 @@ using UnityEngine.SceneManagement;
 
 public enum ChestOnOffState
 {
-    Open, Close
+    Idle, Open, Close
+}
+
+public class ChestIdle : BaseState<ChestController>
+{
+    public override void Enter(ChestController chestController)
+    {
+    }
+
+    public override void Exit(ChestController chestController)
+    {
+
+    }
+
+    public override void Update(ChestController chestController)
+    {
+
+    }
 }
 
 public class ChestOpen : BaseState<ChestController>
@@ -17,7 +34,7 @@ public class ChestOpen : BaseState<ChestController>
         Cursor.lockState = CursorLockMode.None;
         if (chestController.saveItem != null)
         {
-            for (int i = 0; i < chestController.itemNumber; i++)
+            for (int i = 0; i < chestController.saveItem.Count; i++)
             {
                 chestController.AcquireItem(chestController.saveItem[i]);
             }
@@ -40,6 +57,8 @@ public class ChestOpen : BaseState<ChestController>
 
 public class ChestClose : BaseState<ChestController>
 {
+
+
     public override void Enter(ChestController chestController)
     {
         chestController.animator.SetTrigger("Close");
@@ -48,10 +67,19 @@ public class ChestClose : BaseState<ChestController>
             chestController.chestInvertoryUI.SetActive(false);
         }
         Cursor.lockState = CursorLockMode.Locked;
+        InventoryButton.instance.information.SetActive(false);
         if(SceneManager.GetActiveScene().name == "Dungeon Map")
         {
+            chestController.saveItem.Clear();
             for (int i = 0; i < chestController.slots.Length; i++)
             {
+                if (chestController.slots[i].item != null)
+                {
+                    for(int j = 0; j < chestController.slots[i].itemCount; j++)
+                    {
+                        chestController.saveItem.Add(chestController.slots[i].item);
+                    }
+                }
                 chestController.slots[i].ClearSlot();
             }
         }
@@ -81,19 +109,23 @@ public class ChestController : MonoBehaviour
     public Slot[] slots;
     public List<Item> saveItem = new List<Item>();
     private StateMachine<ChestOnOffState, ChestController> stateMachine = new StateMachine<ChestOnOffState, ChestController>();
+    public bool isNull = true;
+    private bool isOnOff = false;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
         stateMachine.Reset(this);
+        stateMachine.AddState(ChestOnOffState.Idle, new ChestIdle());
         stateMachine.AddState(ChestOnOffState.Open, new ChestOpen());
         stateMachine.AddState(ChestOnOffState.Close, new ChestClose());
-        ChangeState(ChestOnOffState.Close);
+        ChangeState(ChestOnOffState.Idle);
     }
 
     private void Start()
     {
         SaveChest();
+        slots = slotsParent.GetComponentsInChildren<Slot>();
     }
 
     private void Update()
@@ -109,7 +141,19 @@ public class ChestController : MonoBehaviour
                 slotsParent = GameObject.Find("Canvas1").transform.GetChild(0).gameObject;
             }
         }
-        slots = slotsParent.GetComponentsInChildren<Slot>();
+    }
+
+    public void OnOff()
+    {
+        isOnOff = !isOnOff;
+        if(isOnOff)
+        {
+            ChangeState(ChestOnOffState.Open);
+        }
+        else
+        {
+            ChangeState(ChestOnOffState.Close);
+        }
     }
 
     public void SaveChest()

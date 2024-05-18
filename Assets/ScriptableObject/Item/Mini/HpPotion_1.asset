@@ -17,7 +17,10 @@ MonoBehaviour:
   itemType: 1
   useType: 1
   ingredientType: 0
-  upGrade: {fileID: 0}
+  bladeType: 0
+  hiltType: 0
+  classType: 0
+  upGrade: []
   percentage: 0
   state:
     amount: 0

@@ -5,6 +5,12 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+public enum BuyType
+{
+    None,Sale
+}
+
+
 public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler, IPointerClickHandler
 {
     public Item item;
@@ -12,28 +18,45 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     public int itemCount;
     public int amount;
     public bool isAmount;
+    public ClassType itemClass;
+    public BuyType buyType;
     [SerializeField] TextMeshProUGUI countText;
     [SerializeField] private GameObject outLine;
     [SerializeField] private GameObject dragSlot;
     [SerializeField] private InventoryButton button;
+    [SerializeField] private Image classImage;
 
+    private Dictionary<ClassType,Color> itemColors = new Dictionary<ClassType, Color>();
 
     private void Awake()
     {
         outLine.SetActive(false);
         isAmount = true;
+        itemColors.Add(ClassType.None, Color.white);
+        itemColors.Add(ClassType.Normal,Color.gray);
+        itemColors.Add(ClassType.Rare, Color.green);
+        itemColors.Add(ClassType.Unique, Color.yellow);
+        itemColors.Add(ClassType.Legend, Color.red);
     }
 
 
     private void Update()
     {
-        if(itemCount <= 0)
+        if (itemCount <= 0)
         {
             ClearSlot();
         }
-        if(dragSlot == null)
+        if (dragSlot == null)
         {
             dragSlot = GameObject.Find("DragSlot").gameObject;
+        }
+
+        if(classImage != null)
+        {
+            if (itemClass != ClassType.None)
+            {
+                ClassColor();
+            }
         }
     }
 
@@ -43,7 +66,8 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         itemCount = count; 
         itemImage.sprite = item.itemImage;
         amount = _item.state.amount;
-        if(item.itemType != ItemType.Equipment)
+        itemClass = item.classType;
+        if (item.itemType != ItemType.Equipment)
         {
             countText.transform.parent.gameObject.SetActive(true);
             countText.text = itemCount.ToString();
@@ -51,6 +75,15 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         else
         {
             countText.transform.parent.gameObject.SetActive(false);
+        }
+
+        if(item.classType == ClassType.None)
+        {
+            classImage.gameObject.SetActive(false);
+        }
+        else
+        {
+            classImage.gameObject.SetActive(true);
         }
         SetColor(1);
     }
@@ -82,6 +115,18 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         SetColor(0);
         countText.transform.parent.gameObject.SetActive(false);
         amount = 0;
+        itemClass = ClassType.None;
+        if(classImage != null)
+        {
+            classImage.gameObject.SetActive(false);
+        }
+    }
+
+    private void ClassColor()
+    {
+        Color color = classImage.color;
+        color = itemColors[itemClass];
+        classImage.color = color;
     }
 
     private void SetColor(float alpha)
@@ -124,11 +169,15 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
             {
                 if(dragSlot != null)
                 {
-                    DragSlot.instance.dragSlot = this;
-                    DragSlot.instance.DragSetImage();
-                    DragSlot.instance.transform.position = eventData.position;
-                    DragSlot.instance.isAmount = isAmount;
-                    DragSlot.instance.amount = amount;
+                    if (transform.parent.transform.tag != "Teleport" || item.classType == ClassType.None)
+                    {
+                        DragSlot.instance.dragSlot = this;
+                        DragSlot.instance.DragSetImage();
+                        DragSlot.instance.transform.position = eventData.position;
+                        DragSlot.instance.isAmount = isAmount;
+                        DragSlot.instance.amount = amount;
+                        DragSlot.instance.classType = itemClass;
+                    }
                 }
             }
         }
@@ -163,19 +212,35 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     private void ChangeSlot()
     {
         Item _tempItem = item;
+        ClassType _tempType = itemClass;
         int _tempItemCount = itemCount;
         bool _isAmount = isAmount;
         int _amount = amount;
 
-        AddItem(DragSlot.instance.dragSlot.item ,DragSlot.instance.dragSlot.itemCount);
+        AddItem(DragSlot.instance.dragSlot.item, DragSlot.instance.dragSlot.itemCount);
         isAmount = DragSlot.instance.isAmount;
         amount = DragSlot.instance.amount;
+        itemClass = DragSlot.instance.classType;
+
+        if (DragSlot.instance.dragSlot.item == _tempItem)
+        {
+            if (DragSlot.instance.dragSlot.item.itemType != ItemType.Equipment)
+            {
+                if(DragSlot.instance.dragSlot != this)
+                {
+                    PlusCount(_tempItemCount);
+                    DragSlot.instance.dragSlot.ClearSlot();
+                }
+                return;
+            }
+        }
 
         if (_tempItem != null)
         {
             DragSlot.instance.dragSlot.AddItem(_tempItem, _tempItemCount);
             DragSlot.instance.dragSlot.isAmount = _isAmount;
             DragSlot.instance.dragSlot.amount = _amount;
+            DragSlot.instance.dragSlot.itemClass = _tempType;
         }
         else
         {
@@ -189,14 +254,6 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         {
             if (eventData.button == PointerEventData.InputButton.Right)
             {
-                if (button.transform.gameObject.activeSelf)
-                {
-                    button.slot = null;
-                    button.gameObject.SetActive(false);
-                    button.SetColor(0);
-                    return;
-                }
-
                 if (button != null)
                 {
                     if (item != null)

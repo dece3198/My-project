@@ -10,6 +10,7 @@ public class DragSlot : MonoBehaviour
     public Image slotImage;
     public int amount;
     public bool isAmount;
+    public ClassType classType;
 
     private void Awake()
     {

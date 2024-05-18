@@ -22,10 +22,12 @@ public class Teleport : MonoBehaviour
         if (isTp)
         {
             teleport.SetActive(true);
+            PlayerCamera.instance.enabled = false;
         }
         else
         {
             teleport.SetActive(false);
+            PlayerCamera.instance.enabled = true;
             Cursor.lockState = CursorLockMode.Locked ;
         }
     }
@@ -34,7 +36,7 @@ public class Teleport : MonoBehaviour
     {
         if (GoldManager.instance.gold >= 15)
         {
-            GoldManager.instance.gold -= 15;
+            InventoryButton.instance.goldManager.gold -= 15;
             SceneManager.LoadScene("Dungeon Map");
         }
         else

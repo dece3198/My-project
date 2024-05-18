@@ -12,11 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc492f583401d844c8569834da6c743f, type: 3}
   m_Name: Glass Bottle
   m_EditorClassIdentifier: 
-  itemImage: {fileID: 21300000, guid: a6fbd5a181bc51e42a61a73fe8d727c8, type: 3}
+  itemImage: {fileID: -100645763, guid: 72f159e9a6a92d746b88a8fdcc115e9f, type: 3}
   itemPrefab: {fileID: 218491870535558885, guid: 832599763b3c9a94e8b3dcade8070d31, type: 3}
   itemType: 2
   useType: 0
   ingredientType: 1
+  bladeType: 0
+  hiltType: 0
+  classType: 0
   upGrade: []
   percentage: 0
   state:

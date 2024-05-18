@@ -27,6 +27,11 @@ public enum HiltType
     None, BasicSwordHilt, LuxurySwordHilt
 }
 
+public enum ClassType
+{
+    None, Normal, Rare, Unique, Legend
+}
+
 
 [System.Serializable]
 public class State
@@ -50,6 +55,7 @@ public class Item : ScriptableObject
     public IngredientType ingredientType;
     public BladeType bladeType;
     public HiltType hiltType;
+    public ClassType classType;
     public Item[] upGrade;
     public int percentage;
     public State state;

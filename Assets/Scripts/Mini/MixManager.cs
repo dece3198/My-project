@@ -20,7 +20,7 @@ public class MixManager : MonoBehaviour
 
     private void Awake()
     {
-        ingredient.Add(IngredientType.GlassBottle, 0);
+        ingredient.Add(IngredientType.GlassBottle, 11);
         ingredient.Add(IngredientType.Gem_1, 1);
         ingredient.Add(IngredientType.Gem_2, 2);
         ingredient.Add(IngredientType.Iron, 3);
@@ -51,14 +51,20 @@ public class MixManager : MonoBehaviour
 
     public void MixButton()
     {
-        if(slider.gameObject.activeSelf)
+        if(slider != null)
         {
-            return;
+            if (slider.gameObject.activeSelf)
+            {
+                return;
+            }
         }
 
-        if(spawnPoint.transform.childCount > 0)
+        if(spawnPoint != null)
         {
-            return;
+            if (spawnPoint.transform.childCount > 0)
+            {
+                return;
+            }
         }
 
 
@@ -68,6 +74,7 @@ public class MixManager : MonoBehaviour
             {
                 if (slots[i].item.ingredientType == IngredientType.None)
                 {
+                    itemNumber = 0;
                     return;
                 }
                 else
@@ -77,13 +84,14 @@ public class MixManager : MonoBehaviour
                 }
             }
         }
+
         switch(itemNumber)
         {
-            case 0: return;
-            case 1: Inventory.instance.AcquireItem(items[0]); break;
-            case 2: Inventory.instance.AcquireItem(items[1]); break;
+            case 0: itemNumber = 0; return;
+            case 12: Inventory.instance.AcquireItem(items[0]); break;
+            case 13: Inventory.instance.AcquireItem(items[1]); break;
             case 3: StartCoroutine(SpawnCo(item.upGrade[0])); break;
-            default: return;
+            default: itemNumber = 0; return;
         }
 
         for(int i = 0; i < slots.Length; i++)
@@ -97,7 +105,7 @@ public class MixManager : MonoBehaviour
     {
         isSpawn = true;
         slider.gameObject.SetActive(true);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(10f);
         GameObject Mineral = Instantiate(_item.itemPrefab);
         Anvil.instance.ingredient = Mineral;
         Mineral.transform.position = spawnPoint.transform.position;

@@ -12,7 +12,7 @@ public class GoldManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        gold = 50;
+        gold = 100;
     }
 
     private void Update()

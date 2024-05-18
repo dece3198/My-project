@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class InventoryButton : MonoBehaviour
 {
@@ -17,11 +18,11 @@ public class InventoryButton : MonoBehaviour
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI textA;
     [SerializeField] private TextMeshProUGUI textB;
+    public GoldManager goldManager;
 
     private void Awake()
     {
         instance = this;
-        this.gameObject.SetActive(false);
         SetColor(0);
         if(SceneManager.GetActiveScene().name == "Home")
         {
@@ -30,6 +31,13 @@ public class InventoryButton : MonoBehaviour
         useText.gameObject.SetActive(false);
     }
 
+    private void Update()
+    {
+        if(goldManager == null)
+        {
+            goldManager = GameObject.Find("Canvas1").transform.GetChild(2).GetComponent<GoldManager>();
+        }
+    }
 
 
     public void SetColor(float alpha)
@@ -56,8 +64,6 @@ public class InventoryButton : MonoBehaviour
             }
             else
             {
-                slot.MinusCount(1);
-                SetColor(0);
                 if (slot.item.useType == UseType.HpUp)
                 {
                     StartCoroutine(TextCo());
@@ -65,10 +71,13 @@ public class InventoryButton : MonoBehaviour
                 }
                 else if (slot.item.useType == UseType.Gold)
                 {
-                    GoldManager.instance.gold += slot.item.state.amount;
+                    goldManager.gold += slot.item.state.amount;
                 }
+                slot.MinusCount(1);
+                SetColor(0);
             }
         }
+        slot = null;
     }
 
     public void InformationButton(Slot slot)
@@ -77,9 +86,16 @@ public class InventoryButton : MonoBehaviour
         image.sprite = slot.itemImage.sprite;
         nameText.text = slot.item.state.name;
         textB.text = slot.item.state.content;
-        if (slot.item.state.amount == 0)
+        if (slot.amount <= 0)
         {
-            textA.gameObject.SetActive(false);
+            if (slot.item.useType != UseType.Return && slot.item.useType != UseType.None)
+            {
+                textA.text = "??";
+            }
+            else
+            {
+                textA.gameObject.SetActive(false);
+            }
         }
         else
         {

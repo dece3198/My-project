@@ -2,11 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCamera : Singleton<PlayerCamera>
+public class PlayerCamera : MonoBehaviour
 {
-    [SerializeField] private float sensitivity = 1000f;
+    public static PlayerCamera instance;
+    public float sensitivity = 500f;
     [SerializeField] private Transform playerBody;
     [SerializeField] private float yRotation = 90f;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {

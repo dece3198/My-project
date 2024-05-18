@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,7 @@ public class CraftingUI : MonoBehaviour
     private Dictionary<HiltType, int> hilt = new Dictionary<HiltType, int>();
 
     public int itemNumber = 0;
+    int rand = 0;
 
     private void Awake()
     {
@@ -28,10 +30,25 @@ public class CraftingUI : MonoBehaviour
         hilt.Add(HiltType.LuxurySwordHilt, 22);
     }
 
-    private void Start()
+    private void RandomPercentage(Item _item)
     {
-        Inventory.instance.AcquireItem(swordItems[0]);
-        Inventory.instance.AcquireItem(swordItems[1]);
+        rand = UnityEngine.Random.Range(0, 100);
+        if(rand <= 50)
+        {
+            _item.classType = ClassType.Normal;
+        }
+        else if(rand > 50 && rand <= 85)
+        {
+            _item.classType = ClassType.Rare;
+        }
+        else if(rand > 85 && rand < 95)
+        {
+            _item.classType = ClassType.Unique;
+        }
+        else
+        {
+            _item.classType = ClassType.Legend;
+        }
     }
 
     private void SetColor(Image image, float alpha)
@@ -72,7 +89,7 @@ public class CraftingUI : MonoBehaviour
 
     public void OkButton()
     {
-        if(slot.item != null && curImage.sprite != sprite)
+        if(slot.item.bladeType != BladeType.None && slot.item != null && curImage.sprite != sprite)
         {
             itemNumber += blade[slot.item.bladeType] + hilt[clickUi.GetComponent<ItemPickUp>().item.hiltType];
             switch (itemNumber)
@@ -88,9 +105,10 @@ public class CraftingUI : MonoBehaviour
     {
         if (GoldManager.instance.gold >= clickUi.GetComponent<ItemPickUp>().item.percentage)
         {
+            RandomPercentage(_item);
             Inventory.instance.AcquireItem(_item);
             itemNumber = 0;
-            slot.ClearSlot();
+            slot.MinusCount(1);
             curImage.sprite = sprite;
             GoldManager.instance.gold -= clickUi.GetComponent<ItemPickUp>().item.percentage;
             clickUi = null;

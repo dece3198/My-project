@@ -68,7 +68,6 @@ public class Monster : MonoBehaviour,IInteractable
     public virtual void TakeHit(float damage)
     {
         Hp -= damage;
-        Debug.Log(Hp);
     }
 
     public IEnumerator DestroyCo(GameObject text)

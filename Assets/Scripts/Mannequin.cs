@@ -18,15 +18,22 @@ public class Mannequin : MonoBehaviour
                 {
                     if (slots[i].item.itemType == ItemType.Equipment)
                     {
-                        for(int j = 0; j < weaponPoint[i].transform.childCount; j++)
+                        for (int j = 0; j < weaponPoint[i].transform.childCount; j++)
                         {
                             if (slots[i].item == weaponPoint[i].transform.GetChild(j).GetComponent<ItemPickUp>().item)
                             {
-                                weaponPoint[i].transform.GetChild(j).gameObject.SetActive(true);
+                                if (weaponPoint[i].transform.GetChild(j).gameObject.activeSelf == false)
+                                {
+                                    weaponPoint[i].transform.GetChild(j).gameObject.SetActive(true);
+                                    Generator.instance.isItem = true;
+                                }
                             }
                             else
                             {
-                                weaponPoint[i].transform.GetChild(j).gameObject.SetActive(false);
+                                if (weaponPoint[i].transform.GetChild(j).gameObject.activeSelf)
+                                {
+                                    weaponPoint[i].transform.GetChild(j).gameObject.SetActive(false);
+                                }
                             }
                         }
                     }

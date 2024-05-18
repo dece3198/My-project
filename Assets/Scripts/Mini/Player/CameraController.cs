@@ -38,9 +38,9 @@ public class CameraController : MonoBehaviour
                 switch (hit.transform.tag)
                 {
                     case "Item": ItemInteraction(); break;
-                    case "Chest": ChestInteraction(); break;
+                    case "Chest": hit.transform.GetComponent<ChestController>().OnOff(); break;
                     case "ChestMonster": hit.transform.GetComponent<Chest>().ChangeState(ChestState.Interaction); break;
-                    case "Door": DoorInteraction(); break;
+                    case "Door": hit.transform.GetComponent<Door>().OnOff(); ; break;
                     case "Cauldron": hit.transform.GetComponent<MixManager>().OnOff(); break;
                     case "Enhancement": hit.transform.GetComponent<Enhancement>().OnOff(); break;
                     case "AmountSetting": hit.transform.GetComponent<AmountSetting>().OnOff(); break;
@@ -64,33 +64,9 @@ public class CameraController : MonoBehaviour
     }
 
 
-    private void ChestInteraction()
-    {
-        if (hit.transform.GetComponent<ChestController>().state == ChestOnOffState.Close)
-        {
-            hit.transform.GetComponent<ChestController>().ChangeState(ChestOnOffState.Open);
-        }
-        else
-        {
-            hit.transform.GetComponent<ChestController>().ChangeState(ChestOnOffState.Close);
-        }
-    }
-
     private void ItemInteraction()
     {
         Inventory.instance.AcquireItem(hit.transform.GetComponent<ItemPickUp>().item);
         Destroy(hit.transform.gameObject);
-    }
-
-    private void DoorInteraction()
-    {
-        if (hit.transform.GetComponent<Door>().state == DoorOnOffState.Close)
-        {
-            hit.transform.GetComponent<Door>().ChangeState(DoorOnOffState.Open);
-        }
-        else
-        {
-            hit.transform.GetComponent<Door>().ChangeState(DoorOnOffState.Close);
-        }
     }
 }
