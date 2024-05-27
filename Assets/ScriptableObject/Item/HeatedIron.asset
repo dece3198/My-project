@@ -16,10 +16,13 @@ MonoBehaviour:
   itemPrefab: {fileID: 7223567543892374692, guid: 3f060e2c5af214646b57291c327927ea, type: 3}
   itemType: 2
   useType: 0
-  ingredientType: 0
+  ingredientType: 6
+  bladeType: 0
+  hiltType: 0
+  classType: 0
   upGrade:
-  - {fileID: 11400000, guid: ce12ad77d40d1274e8184345c8a807d9, type: 2}
   - {fileID: 11400000, guid: 339c1fc503240f14185155abe88ede1c, type: 2}
+  - {fileID: 11400000, guid: ce12ad77d40d1274e8184345c8a807d9, type: 2}
   percentage: 0
   state:
     amount: 0

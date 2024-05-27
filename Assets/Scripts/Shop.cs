@@ -5,7 +5,6 @@ using UnityEngine;
 public class Shop : MonoBehaviour
 {
     [SerializeField] private GameObject shopUi;
-    bool isShop = false;
 
     private void Awake()
     {
@@ -14,15 +13,7 @@ public class Shop : MonoBehaviour
 
     public void OnOff()
     {
-        isShop = !isShop;
-        if(isShop)
-        {
-            shopUi.SetActive(true);
-        }
-        else
-        {
-            shopUi.SetActive(false);
-        }
+        shopUi.SetActive(true);
     }
 
     public void XButton()

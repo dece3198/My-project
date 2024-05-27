@@ -6,22 +6,23 @@ public class Generator : MonoBehaviour
 {
     public static Generator instance;
     [SerializeField] private List<GameObject> guests = new List<GameObject>();
+    [SerializeField] private List<GameObject> eventGuest = new List<GameObject>();
     [SerializeField] private List<GameObject> guestPool = new List<GameObject>();
     [SerializeField] private Slot[] slots;
     [SerializeField] private GameObject[] destination;
     [SerializeField] private NavManager navManager;
+    [SerializeField] private GameObject warningText;
     private Dictionary<ClassType, int> itemTypes = new Dictionary<ClassType, int>();
     private GameObject curGuest;
     int rand = 0;
-    public bool isItem = false;
 
     private void Awake()
     {
         instance = this;
-        itemTypes.Add(ClassType.Normal, 20);
-        itemTypes.Add(ClassType.Rare, 15);
-        itemTypes.Add(ClassType.Unique, 10);
-        itemTypes.Add(ClassType.Legend, 5);
+        itemTypes.Add(ClassType.Normal, 15);
+        itemTypes.Add(ClassType.Rare, 10);
+        itemTypes.Add(ClassType.Unique, 5);
+        itemTypes.Add(ClassType.Legend, 0);
     }
 
     private void Start()
@@ -37,6 +38,7 @@ public class Generator : MonoBehaviour
                 guest.SetActive(false);
             }
         }
+        StartCoroutine(EventCo());
     }
 
     private void Update()
@@ -47,15 +49,11 @@ public class Generator : MonoBehaviour
             {
                 if (slots[i].item != null)
                 {
-                    if (isItem)
+                    if (slots[i].buyType == BuyType.None)
                     {
-                        if (slots[i].buyType == BuyType.None)
-                        {
-                            StartCoroutine(GuestCo(i));
-                            slots[i].buyType = BuyType.Sale;
-                            isItem = false;
-                        }
-
+                        IEnumerator enumerator = GuestCo(i);
+                        StartCoroutine(enumerator);
+                        slots[i].buyType = BuyType.Sale;
                     }
                 }
             }
@@ -63,13 +61,14 @@ public class Generator : MonoBehaviour
     }
     private IEnumerator GuestCo(int _count)
     {
+
         yield return new WaitForSeconds(itemTypes[slots[_count].itemClass]);
         GuestExitPool();
         curGuest.GetComponent<GuestController>().buyItem = slots[_count];
-        curGuest.GetComponent<GuestController>().destination = navManager.gameObject;
-        curGuest.GetComponent<GuestController>().slot = slots[_count];
+        curGuest.GetComponent<GuestController>().destination = destination[_count];
+        curGuest.GetComponent<GuestController>().navManager = navManager;
         curGuest.GetComponent<GuestController>().ChangeState(GuestState.Walk);
-        navManager.destination = destination[_count];
+        destination[_count].GetComponent<Destination>().controller = curGuest.GetComponent<GuestController>();
     }
 
     private void GuestExitPool()
@@ -85,5 +84,27 @@ public class Generator : MonoBehaviour
         _guest.gameObject.SetActive(false);
         _guest.transform.position = transform.position;
         guestPool.Add(_guest);
+    }
+
+    private IEnumerator EventCo()
+    {
+        for(int i = 0; i < eventGuest.Count; i++)
+        {
+            yield return new WaitForSeconds(300);
+            GameObject eGuest = Instantiate(eventGuest[i], transform);
+            eGuest.transform.position = transform.position;
+            eGuest.GetComponent<GuestController>().navManager = navManager;
+            eGuest.GetComponent<GuestController>().destination = destination[1].gameObject;
+            eGuest.GetComponent<GuestController>().ChangeState(GuestState.Walk);
+            warningText.SetActive(true);
+            destination[1].GetComponent<Destination>().eventController = eGuest.GetComponent<GuestController>();
+            if (slots[1].item != null)
+            {
+                slots[1].item.classType = slots[1].itemClass;
+                Inventory.instance.AcquireItem(slots[1].item);
+                slots[1].ClearSlot();
+                destination[1].GetComponent<Destination>().controller.ChangeState(GuestState.Out);
+            }
+        }
     }
 }

@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum CharacterState
+{
+    King,Assassinm,Nobility
+}
+
 [System.Serializable]
 public class Talks
 {
@@ -11,6 +16,7 @@ public class Talks
     public string price;
     public Sprite image;
     public Item item;
+    public int talkNumber;
 }
 
 
@@ -18,4 +24,5 @@ public class Talks
 public class Talk : ScriptableObject
 {
     public Talks[] talks;
+    public CharacterState characterState;
 }

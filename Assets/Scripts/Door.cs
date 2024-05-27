@@ -13,7 +13,14 @@ public class DoorIdle : BaseState<Door>
 {
     public override void Enter(Door door)
     {
-        door.animator.Play("DoorIdle");
+        if (door.animator != null)
+        {
+            door.animator.Play("DoorIdle");
+        }
+        else
+        {
+            door.SetColor(0.2f);
+        }
     }
 
     public override void Exit(Door door)

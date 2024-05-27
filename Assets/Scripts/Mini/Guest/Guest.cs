@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public enum GuestState
 {
-    Idle,Walk,Buy,Out,Worry, Angry
+    Idle,Walk,Buy,Out,Worry, Angry, Event, EventOut
 }
 
 

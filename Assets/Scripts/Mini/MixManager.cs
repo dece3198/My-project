@@ -10,7 +10,6 @@ public class MixManager : MonoBehaviour
     [SerializeField] private GameObject spawnPoint;
     public int itemNumber = 0;
     private Dictionary<IngredientType, int> ingredient = new Dictionary<IngredientType, int>();
-    private bool parent = false;
     private bool isSpawn = false;
     [SerializeField] private Slider slider;
     float min;
@@ -24,6 +23,10 @@ public class MixManager : MonoBehaviour
         ingredient.Add(IngredientType.Gem_1, 1);
         ingredient.Add(IngredientType.Gem_2, 2);
         ingredient.Add(IngredientType.Iron, 3);
+        ingredient.Add(IngredientType.Coal, 4);
+        ingredient.Add(IngredientType.WroughtIiron, 5);
+        ingredient.Add(IngredientType.Steel, 10);
+        ingredient.Add(IngredientType.Gold, 16);
         max = 10f;
     }
 
@@ -38,15 +41,7 @@ public class MixManager : MonoBehaviour
 
     public void OnOff()
     {
-        parent = !parent;
-        if(parent)
-        {
-            slots[0].transform.parent.transform.parent.gameObject.SetActive(true);
-        }
-        else
-        {
-            slots[0].transform.parent.transform.parent.gameObject.SetActive(false);
-        }
+        slots[0].transform.parent.transform.parent.gameObject.SetActive(true);
     }
 
     public void MixButton()
@@ -91,6 +86,11 @@ public class MixManager : MonoBehaviour
             case 12: Inventory.instance.AcquireItem(items[0]); break;
             case 13: Inventory.instance.AcquireItem(items[1]); break;
             case 3: StartCoroutine(SpawnCo(item.upGrade[0])); break;
+            case 7: Inventory.instance.AcquireItem(items[0]); break;
+            case 8: Inventory.instance.AcquireItem(items[1]); break;
+            case 10: StartCoroutine(SpawnCo(item.upGrade[0])); break;
+            case 16: StartCoroutine(SpawnCo(item.upGrade[0])); break;
+
             default: itemNumber = 0; return;
         }
 
@@ -113,5 +113,10 @@ public class MixManager : MonoBehaviour
         slider.gameObject.SetActive(false);
         isSpawn = false;
         min = 0;
+    }
+
+    public void XButton()
+    {
+        slots[0].transform.parent.transform.parent.gameObject.SetActive(false);
     }
 }

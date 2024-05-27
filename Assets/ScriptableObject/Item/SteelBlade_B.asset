@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc492f583401d844c8569834da6c743f, type: 3}
+  m_Name: SteelBlade_B
+  m_EditorClassIdentifier: 
+  itemImage: {fileID: 21300000, guid: bcabbe1e0e37c6e44bbd97ca3c225d5e, type: 3}
+  itemPrefab: {fileID: 486595984707090154, guid: 575e52c785d5d6c418ddcfcc3c595354, type: 3}
+  itemType: 2
+  useType: 0
+  ingredientType: 0
+  bladeType: 2
+  hiltType: 0
+  classType: 0
+  upGrade:
+  - {fileID: 11400000, guid: 3026336e05d05fa49945af8f0560b1e4, type: 2}
+  percentage: 0
+  state:
+    amount: 0
+    max: 0
+    min: 0
+    name: "\uAC15\uCCA0 \uC591\uB0A0\uAC80 \uBA38\uB9AC"
+    content: 

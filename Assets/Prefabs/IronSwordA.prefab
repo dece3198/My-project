@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 6921946381151559776}
   - component: {fileID: 6969553341936912326}
   - component: {fileID: 3249088531586769819}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: IronSwordA
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -179,6 +179,10 @@ PrefabInstance:
     - target: {fileID: 2028881384868534877, guid: 7291ddcea439c8b4d8bd5c8ba11fbe9c, type: 3}
       propertyPath: m_Name
       value: IronBladeB
+      objectReference: {fileID: 0}
+    - target: {fileID: 2028881384868534877, guid: 7291ddcea439c8b4d8bd5c8ba11fbe9c, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7291ddcea439c8b4d8bd5c8ba11fbe9c, type: 3}

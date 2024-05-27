@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Anvil : MonoBehaviour
 {
@@ -10,10 +11,13 @@ public class Anvil : MonoBehaviour
     public GameObject point;
     public int itemNumber = 0;
     [SerializeField] private Animator animator;
+    [SerializeField] private Image skipImage;
     private bool isRight = false;
     private bool isLeft = false;
     private bool ismid = false;
     private bool isHammeringCool = true;
+    private bool isSkip = false;
+    private int skip = 1;
 
     private void Awake()
     {
@@ -27,9 +31,9 @@ public class Anvil : MonoBehaviour
             if(isHammeringCool)
             {
                 StartCoroutine(HammeringCo());
-                animator.SetTrigger("Hammering");
                 if (ingredient.transform.GetChild(0).transform.localScale.z > 30)
                 {
+                    animator.SetTrigger("Hammering");
                     ingredient.transform.GetChild(0).transform.localScale -= new Vector3(0, 0, 10f);
                     ingredient.transform.GetChild(0).transform.position -= new Vector3(0, 0.005f, 0);
                     isLeft = true;
@@ -54,9 +58,9 @@ public class Anvil : MonoBehaviour
             if(isHammeringCool)
             {
                 StartCoroutine(HammeringCo());
-                animator.SetTrigger("Hammering");
                 if (ingredient.transform.GetChild(1).transform.localScale.z > 30)
                 {
+                    animator.SetTrigger("Hammering");
                     ingredient.transform.GetChild(1).transform.localScale -= new Vector3(0, 0, 10f);
                     ingredient.transform.GetChild(1).transform.position -= new Vector3(0, 0.005f, 0);
                     isRight = true;
@@ -81,9 +85,9 @@ public class Anvil : MonoBehaviour
             if(isHammeringCool)
             {
                 StartCoroutine(HammeringCo());
-                animator.SetTrigger("Hammering");
                 if (ingredient.transform.localScale.z < 1.5f)
                 {
+                    animator.SetTrigger("Hammering");
                     ingredient.transform.localScale += new Vector3(0, 0, 0.05f);
                     ingredient.transform.GetChild(2).transform.localScale += new Vector3(0, 0, 0.05f);
                     ismid = true;
@@ -106,9 +110,8 @@ public class Anvil : MonoBehaviour
         {
             switch (itemNumber)
             {
-                case 3 : AddItem(ingredient.GetComponent<ItemPickUp>().item.upGrade[1]); break;
-                case 4 : AddItem(ingredient.GetComponent<ItemPickUp>().item.upGrade[1]); break;
-                case 6 : AddItem(ingredient.GetComponent<ItemPickUp>().item.upGrade[0]); break;
+                case 4 : AddItem(ingredient.GetComponent<ItemPickUp>().item.upGrade[0]); break;
+                case 6 : AddItem(ingredient.GetComponent<ItemPickUp>().item.upGrade[1]); break;
             }
         }
     }
@@ -124,8 +127,29 @@ public class Anvil : MonoBehaviour
     private IEnumerator HammeringCo()
     {
         isHammeringCool = false;
-        yield return new WaitForSeconds(0f);
+        yield return new WaitForSeconds(skip);
         isHammeringCool = true;
     }
 
+    public void SkipButton()
+    {
+        isSkip = !isSkip;
+        if(isSkip)
+        {
+            skip = 0;
+            SetColor(0.5f);
+        }
+        else
+        {
+            skip = 1;
+            SetColor(1);
+        }
+    }
+
+    private void SetColor(float alpha)
+    {
+        Color color = skipImage.color;
+        color.a = alpha;
+        skipImage.color = color;
+    }
 }

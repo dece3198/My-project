@@ -28,7 +28,10 @@ public class InventoryButton : MonoBehaviour
         {
             playerState = GameObject.Find("Player").GetComponent<PlayerState>();
         }
-        useText.gameObject.SetActive(false);
+        if (useText != null)
+        {
+            useText.gameObject.SetActive(false);
+        }
     }
 
     private void Update()

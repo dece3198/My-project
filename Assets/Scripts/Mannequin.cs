@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Mannequin : MonoBehaviour
@@ -16,33 +17,21 @@ public class Mannequin : MonoBehaviour
             {
                 if (slots[i].item != null)
                 {
-                    if (slots[i].item.itemType == ItemType.Equipment)
+                    if (weaponPoint[i].transform.childCount <= 0)
                     {
-                        for (int j = 0; j < weaponPoint[i].transform.childCount; j++)
-                        {
-                            if (slots[i].item == weaponPoint[i].transform.GetChild(j).GetComponent<ItemPickUp>().item)
-                            {
-                                if (weaponPoint[i].transform.GetChild(j).gameObject.activeSelf == false)
-                                {
-                                    weaponPoint[i].transform.GetChild(j).gameObject.SetActive(true);
-                                    Generator.instance.isItem = true;
-                                }
-                            }
-                            else
-                            {
-                                if (weaponPoint[i].transform.GetChild(j).gameObject.activeSelf)
-                                {
-                                    weaponPoint[i].transform.GetChild(j).gameObject.SetActive(false);
-                                }
-                            }
-                        }
+                        GameObject sword = Instantiate(slots[i].item.itemPrefab, weaponPoint[i].transform);
+                        sword.transform.position = weaponPoint[i].transform.position;
+                        sword.transform.rotation = weaponPoint[i].transform.rotation;
                     }
                 }
                 else
                 {
-                    for (int j = 0; j < weaponPoint[i].transform.childCount; j++)
+                    if (weaponPoint[i].transform.childCount > 0)
                     {
-                        weaponPoint[i].transform.GetChild(j).gameObject.SetActive(false);
+                        for(int j = 0; j < weaponPoint[i].transform.childCount; j++)
+                        {
+                           Destroy(weaponPoint[i].transform.GetChild(j).gameObject);
+                        }
                     }
                 }
             }

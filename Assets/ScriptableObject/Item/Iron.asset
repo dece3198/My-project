@@ -17,6 +17,9 @@ MonoBehaviour:
   itemType: 2
   useType: 0
   ingredientType: 6
+  bladeType: 0
+  hiltType: 0
+  classType: 0
   upGrade:
   - {fileID: 11400000, guid: 6f81d4095c5be3a4eaa14ab96bce6ee5, type: 2}
   percentage: 0
@@ -24,5 +27,6 @@ MonoBehaviour:
     amount: 0
     max: 0
     min: 0
-    name: 
-    content: 
+    name: "\uC0DD\uCCA0"
+    content: "\uB2E8\uB2E8\uD558\uC9C0\uB9CC \uBD80\uB7EC\uC9C0\uAE30 \uC26C\uC6B4
+      \uC131\uC9C8\uC758 \uCCA0\n\uAC00\uC5F4\uD574 \uB450\uB4DC\uB824 \uBCF4\uC790"

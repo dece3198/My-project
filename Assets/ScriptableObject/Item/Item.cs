@@ -14,7 +14,7 @@ public enum UseType
 
 public enum IngredientType
 {
-    None,GlassBottle, Gem_1, Gem_2, Gem_3, Gem_4, Iron
+    None,GlassBottle, Gem_1, Gem_2, Gem_3, Gem_4, Iron, Coal, WroughtIiron, Steel, Gold
 }
 
 public enum BladeType

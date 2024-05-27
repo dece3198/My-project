@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e1c1831b58776644b78e12a1d3496e9, type: 3}
+  m_Name: KingTalk
+  m_EditorClassIdentifier: 
+  talks:
+  - talkerName: "\uAD6D\uC655"
+    conversation: "\uD06C\uD760..."
+    price: 0
+    image: {fileID: 0}
+    item: {fileID: 0}
+    talkNumber: 0
+  - talkerName: "\uAD6D\uC655"
+    conversation: "\uC5EC\uAE30\uAC00 \uC18C\uBB38\uC73C\uB85C \uB4E3\uB358 \uB300\uC7A5\uAC04\uC778\uAC00....?"
+    price: 0
+    image: {fileID: 0}
+    item: {fileID: 0}
+    talkNumber: 0
+  - talkerName: "\uAD6D\uC655"
+    conversation: "\uACE7 \uC788\uC73C\uBA74 \uB9C9\uB0B4 \uC544\uB4E4\uC758 \uC0DD\uC77C\uC778\uB370
+      \uBA4B\uC9C4 \uAC80 \uD558\uB098 \uB9CC\uB4E4\uC5B4 \uC904 \uC218 \uC788\uB294\uAC00...?"
+    price: 0
+    image: {fileID: 0}
+    item: {fileID: 0}
+    talkNumber: 1

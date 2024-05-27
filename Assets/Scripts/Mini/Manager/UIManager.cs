@@ -92,10 +92,9 @@ public class UIManager : MonoBehaviour
             else
             {
                 mainUI.SetActive(false);
+                InventoryButton.instance.information.SetActive(false);
                 if (SceneManager.GetActiveScene().name != "Blacksmith")
                 {
-                    InventoryButton.instance.information.SetActive(false);
-
                     if (playerController != null)
                     {
                         playerController.isAttack = true;

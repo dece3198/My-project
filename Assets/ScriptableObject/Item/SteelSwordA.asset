@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc492f583401d844c8569834da6c743f, type: 3}
+  m_Name: SteelSwordA
+  m_EditorClassIdentifier: 
+  itemImage: {fileID: 21300000, guid: 7e7139545b399fc45aefb095faadc3db, type: 3}
+  itemPrefab: {fileID: 1447735206293757058, guid: 31609cf7576f4fc488172e56c536678a, type: 3}
+  itemType: 0
+  useType: 0
+  ingredientType: 9
+  bladeType: 0
+  hiltType: 1
+  classType: 0
+  upGrade: []
+  percentage: 80
+  state:
+    amount: 0
+    max: 0
+    min: 0
+    name: "\uAC15\uCCA0\uC678\uB0A0\uAC80"
+    content: "\uAC00\uACA9 : 80\uACE8\uB4DC"

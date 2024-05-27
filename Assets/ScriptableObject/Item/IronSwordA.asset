@@ -16,14 +16,15 @@ MonoBehaviour:
   itemPrefab: {fileID: 6942536731571749396, guid: 8ffb660511046924d9c6e33e1e0bc83a, type: 3}
   itemType: 0
   useType: 0
-  ingredientType: 0
+  ingredientType: 6
   bladeType: 0
-  hiltType: 0
+  hiltType: 1
+  classType: 1
   upGrade: []
-  percentage: 120
+  percentage: 20
   state:
     amount: 0
     max: 0
     min: 0
-    name: 
-    content: 
+    name: "\uCCA0\uC678\uB0A0\uAC80"
+    content: "\uAC00\uACA9 : 20\uACE8\uB4DC"

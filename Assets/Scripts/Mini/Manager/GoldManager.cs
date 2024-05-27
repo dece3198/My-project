@@ -7,12 +7,13 @@ public class GoldManager : MonoBehaviour
 {
     public static GoldManager instance;
     [SerializeField] private TextMeshProUGUI goldText;
+    public TextMeshProUGUI goldTextB;
     public int gold;
 
     private void Awake()
     {
         instance = this;
-        gold = 100;
+        gold = 10;
     }
 
     private void Update()

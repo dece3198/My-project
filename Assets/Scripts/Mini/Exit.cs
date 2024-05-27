@@ -23,7 +23,18 @@ public class Exit : MonoBehaviour
 
         if(other.GetComponent<GuestController>() != null)
         {
-            Generator.instance.GuestEnterPool(other.GetComponent<GuestController>().gameObject);
+            if(other.GetComponent<GuestController>().transform.tag == "Event")
+            {
+                Destroy(other.GetComponent<GuestController>().gameObject);
+            }
+            else
+            {
+                Generator.instance.GuestEnterPool(other.GetComponent<GuestController>().gameObject);
+            }
+            if(other.GetComponent<GuestController>().buyItem != null)
+            {
+                other.GetComponent<GuestController>().buyItem.buyType = BuyType.None;
+            }
         }
     }
 }
